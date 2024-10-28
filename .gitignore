@@ -1,0 +1,10 @@
+# ignore all
+*
+
+# all files with extensions and directories
+!*.*
+!*/
+
+*test*.*
+*.exe
+*.csv
