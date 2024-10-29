@@ -17,7 +17,7 @@ void heapify(int* tab, int n, int i) {
 }
 
 void build_heap(int* tab, int n) {
-	for(int i = n / 2 - 1; i >= 0; i--) {
+	for(int i = n / 2; i >= 0; i--) {
 		heapify(tab, n, i);
 	}
 }
@@ -26,6 +26,6 @@ void heap_sort(int* tab, int n) {
 	build_heap(tab, n);
 	for(int i = n - 1; i >= 1; i--) {
 		std::swap(tab[0], tab[i]);
-		heapify(tab, i - 1, 0);
+		heapify(tab, i, 0);
 	}
 }

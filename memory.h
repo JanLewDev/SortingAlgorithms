@@ -4,7 +4,7 @@
  */
 
 #if defined(_WIN32)
-// Order changed here!
+// Order of includes matters here;
 #include <windows.h>
 #include <psapi.h>
 

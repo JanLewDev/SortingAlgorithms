@@ -28,10 +28,16 @@ long double get_MB() {
     return (long double)(bytes) / 1000000;
 }
 
-int main() {
-	std::ofstream result("result.csv");
-	assert(result.is_open());
-	result << "Algorithm,Length,Time,Memory\n";
+int main(int argc, char** argv) {
+	std::ofstream results;
+	bool wrtie_to_csv = false;
+	if (argc > 1 && std::string(argv[1]) == "csv") {
+		wrtie_to_csv = true;
+		results.open("results.csv");
+		assert(results.is_open());
+		results << "Algorithm,Length,Time,Memory\n";
+	}
+
 	for(int i = 1; i <= number_of_tests; i++) {
 		for(int n : test_sizes) {
 			int* tab = generate_random_array(i, n);
@@ -46,15 +52,17 @@ int main() {
 				auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 				check(input, copy, n);
 				std::cout << names[j] << " " << n << " " << duration.count() << " " << get_MB() << "\n";
-				result << names[j] << "," << n << "," << duration.count() << "," << get_MB() << "\n";
-				result.flush();
+				if (wrtie_to_csv) {
+					results << names[j] << "," << n << "," << duration.count() << "," << get_MB() << "\n";
+					results.flush();
+				}
 				delete[] copy;
 			}
 			delete[] tab;
 			delete[] input;
 		}
 	}
-	result.close();
+	results.close();
 
 	return 0;
 }

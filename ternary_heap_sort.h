@@ -21,7 +21,7 @@ namespace ternary {
 	}
 
 	void build_heap(int* tab, int n) {
-		for(int i = n / 3 + 1; i >= 0; i--) {
+		for(int i = n / 3; i >= 0; i--) {
 			heapify(tab, n, i);
 		}
 	}
@@ -30,7 +30,7 @@ namespace ternary {
 		build_heap(tab, n);
 		for(int i = n - 1; i >= 1; i--) {
 			std::swap(tab[0], tab[i]);
-			heapify(tab, i - 1, 0);
+			heapify(tab, i, 0);
 		}
 	}
 }
